@@ -1,0 +1,59 @@
+image: node:14.15.3
+pipelines:
+  # default - contains the steps that will run on every push.
+  # default:
+  branches:
+    # You can include your custom branches and the steps you'd like to undertake e.g. testing
+    #development
+    development:
+      - step:
+          name: Installation
+          caches:
+            - node
+          script:
+            - yarn config set ignore-engines true
+            - yarn install
+      - step:
+          name: Build and Deploy App for Development
+          deployment: Development
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: $SERVER_USER
+                SERVER: $SERVER_IP
+                COMMAND: $DEV_DEPLOYMENT_SCRIPT
+    staging:
+      - step:
+          name: Installation
+          caches:
+            - node
+          script:
+            - yarn config set ignore-engines true
+            - yarn install
+      - step:
+          name: Build and Deploy App for Staging
+          deployment: Staging
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: $SERVER_USER
+                SERVER: $SERVER_IP
+                COMMAND: $STAGING_DEPLOYMENT_SCRIPT
+
+    master:
+      - step:
+          name: Installation
+          caches:
+            - node
+          script:
+            - yarn config set ignore-engines true
+            - yarn install
+      - step:
+          name: Build and Deploy App for Production
+          deployment: Production
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: $SERVER_USER
+                SERVER: $SERVER_IP
+                COMMAND: $PROD_DEPLOYMENT_SCRIPT
