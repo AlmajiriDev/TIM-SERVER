@@ -102,7 +102,7 @@ exports.loginUser = async (req, res, next) => {
 
     const admin = parseBoolean(loadedUser.isAdmin);
 
-    const accessToken = await signAccessToken(loadedUser._id, admin);
+    const accessToken = await signAccessToken(loadedUser._id, admin, loadedUser.account_type);
     const refreshToken = await signRefreshToken(loadedUser._id);
     const numUpdated = await  User.findByIdAndUpdate(loadedUser._id, {status: status.ONLINE.value})
 

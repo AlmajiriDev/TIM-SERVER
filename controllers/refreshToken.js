@@ -50,7 +50,7 @@ const createToken = async (userId, token, reject) => {
 
 
   module.exports = {
-    signAccessToken: (userId, isAdmin) => {
+    signAccessToken: (userId, isAdmin, account_type) => {
       // console.log(isAdmin);
       return new Promise((resolve, reject) => {
         const payload = { userInfo: {_id: userId, admin: isAdmin, account_type} };
