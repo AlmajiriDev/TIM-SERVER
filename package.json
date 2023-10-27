@@ -10,7 +10,7 @@
     "start:prod": "node app.js --env=prod"
   },
   "keywords": [],
-  "author": "",
+  "author": "Awwal <almajiri.dev@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -48,5 +48,6 @@
       "PORT": 5000,
       "HOST": "0.0.0.0"
     }
-  }
+  },
+  "repository": "https://github.com/iamAwwal/TIM-SERVER.git"
 }
